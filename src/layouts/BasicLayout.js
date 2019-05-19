@@ -10,6 +10,7 @@ import Context from './MenuContext';
 import SiderMenu from '../components/SiderMenu';
 import getPageTitle from '../utils/getPageTitle';
 import styles from './BasicLayout.module.less';
+
 // Majid :)
 // import { connect } from 'dva';
 // import Media from 'react-media';
@@ -20,202 +21,203 @@ import styles from './BasicLayout.module.less';
 const { Content } = Layout;
 
 const query = {
-  'screen-xs': {
-    maxWidth: 575,
-  },
-  'screen-sm': {
-    minWidth: 576,
-    maxWidth: 767,
-  },
-  'screen-md': {
-    minWidth: 768,
-    maxWidth: 991,
-  },
-  'screen-lg': {
-    minWidth: 992,
-    maxWidth: 1199,
-  },
-  'screen-xl': {
-    minWidth: 1200,
-    maxWidth: 1599,
-  },
-  'screen-xxl': {
-    minWidth: 1600,
-  },
+    'screen-xs': {
+        maxWidth: 575,
+    },
+    'screen-sm': {
+        minWidth: 576,
+        maxWidth: 767,
+    },
+    'screen-md': {
+        minWidth: 768,
+        maxWidth: 991,
+    },
+    'screen-lg': {
+        minWidth: 992,
+        maxWidth: 1199,
+    },
+    'screen-xl': {
+        minWidth: 1200,
+        maxWidth: 1599,
+    },
+    'screen-xxl': {
+        minWidth: 1600,
+    },
 };
 
 export default class BasicLayout extends React.Component {
-  componentDidMount() {
-    // Majid :)
-    // const {
-    //   dispatch,
-    //   route: { routes, path, authority },
-    // } = this.props;
 
-    // dispatch({
-    //   type: 'user/fetchCurrent',
-    // });
-    // dispatch({
-    //   type: 'setting/getSetting',
-    // });
-    // dispatch({
-    //   type: 'menu/getMenuData',
-    //   payload: { routes, path, authority },
-    // });
-  }
+    componentDidMount() {
 
-  getContext() {
-    const { location, breadcrumbNameMap } = this.props;
-    return {
-      location,
-      breadcrumbNameMap,
-    };
-  }
+        // Majid :)
+        // const {
+        //   dispatch,
+        //   route: { routes, path, authority },
+        // } = this.props;
 
-  getLayoutStyle = () => {
-    const { fixSiderbar, isMobile, collapsed, layout } = this.props;
-    if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
-      return {
-        paddingLeft: collapsed ? '80px' : '256px',
-      };
+        // dispatch({
+        //   type: 'user/fetchCurrent',
+        // });
+        // dispatch({
+        //   type: 'setting/getSetting',
+        // });
+        // dispatch({
+        //   type: 'menu/getMenuData',
+        //   payload: { routes, path, authority },
+        // });
     }
-    return null;
-  };
 
-  handleMenuCollapse = collapsed => {
-    // Majid :)
-    // const { dispatch } = this.props;
-    // dispatch({
-    //   type: 'global/changeLayoutCollapsed',
-    //   payload: collapsed,
-    // });
-  };
-
-  renderSettingDrawer = () => {
-    // Do not render SettingDrawer in production
-    // unless it is deployed in preview.pro.ant.design as demo
-    // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
-    if (
-      process.env.NODE_ENV === 'production' /*&& ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION !== 'site'*/
-    ) {
-      return null;
+    getContext() {
+        const { location, breadcrumbNameMap } = this.props;
+        return {
+            location,
+            breadcrumbNameMap,
+        };
     }
-    // return <SettingDrawer />;
-  };
 
-  render() {
-    const {
-      layout: PropsLayout,
-      children,
-      isMobile,
-      // Majid :)
-      // fixedHeader,
-      // navTheme,
-      // location: { pathname },
-      // menuData,
-      // breadcrumbNameMap,
-    } = this.props;
-    // Majid :)
-    let fixedHeader = true
-    let navTheme = 'dark'
-    let menuData = [ 
-        {   
-            icon: "dashboard",
-            locale: "menu.dashboard",
-            name: "Dashboard",
-            path: "/dashboard",
-            children: [
-                {   
-                    icon: "dashboard",
-                    locale: "menu.foo",
-                    name: "Main",
-                    path: "/",
-                },
-                {   
-                    icon: "dashboard",
-                    locale: "menu.foo",
-                    name: "Foo",
-                    path: "/foo",
-                },
-                {   
-                    icon: "dashboard",
-                    locale: "menu.bar",
-                    name: "Bar",
-                    path: "/bar",
-                }
-            ]
-        },
-        {   
-            icon: "dashboard",
-            locale: "menu.foo",
-            name: "Foo",
-            path: "/foo",
-        },
-        {   
-            icon: "dashboard",
-            locale: "menu.bar",
-            name: "Bar",
-            path: "/bar",
+    getLayoutStyle = () => {
+        const { fixSiderbar, isMobile, collapsed, layout } = this.props;
+        if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
+            return {
+                paddingLeft: collapsed ? '80px' : '256px',
+            };
         }
-    ]
-    let breadcrumbNameMap = {}
-    let pathname = {}
+        return null;
+    };
 
-    const isTop = PropsLayout === 'topmenu';
-    const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
-    const layout = (
-      <Layout>
-        {isTop && !isMobile ? null : (
-          <SiderMenu
-            logo={logo}
-            theme={navTheme}
-            onCollapse={this.handleMenuCollapse}
-            menuData={menuData}
-            isMobile={isMobile}
-            {...this.props}
+    handleMenuCollapse = collapsed => {
+        // Majid :)
+        // const { dispatch } = this.props;
+        // dispatch({
+        //   type: 'global/changeLayoutCollapsed',
+        //   payload: collapsed,
+        // });
+    };
 
+    renderSettingDrawer = () => {
+        // Do not render SettingDrawer in production
+        // unless it is deployed in preview.pro.ant.design as demo
+        // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+        if (
+            process.env.NODE_ENV === 'production' /*&& ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION !== 'site'*/
+        ) {
+            return null;
+        }
+        // return <SettingDrawer />;
+    };
+
+    render() {
+
+        const {
+            layout: PropsLayout,
+            children,
+            isMobile,
+            fixedHeader,
+            navTheme,
             // Majid :)
-            breadcrumbNameMap={breadcrumbNameMap}
-            location={{pathname: '/foo'}}
-          />
-        )}
-        <Layout
-          style={{
-            ...this.getLayoutStyle(),
-            minHeight: '100vh',
-          }}
-        >
-          <Header
-            menuData={menuData}
-            handleMenuCollapse={this.handleMenuCollapse}
-            logo={logo}
-            isMobile={isMobile}
-            {...this.props}
-            // Majid :)
-            setting={ {navTheme, layout:'sidemenu', fixedHeader} }
-          />
-          <Content className={styles.content} style={contentStyle}>
-            {children}
-          </Content>
-          <Footer />
-        </Layout>
-      </Layout>
-    );
-    return (
-      <React.Fragment>
-        <DocumentTitle title={getPageTitle(pathname, breadcrumbNameMap)}>
-          <ContainerQuery query={query}>
-            {params => (
-              <Context.Provider value={this.getContext()}>
-                <div className={classNames(params)}>{layout}</div>
-              </Context.Provider>
+            // location: { pathname },
+            // menuData,
+            // breadcrumbNameMap,
+        } = this.props;
+
+        // Majid :)
+        let breadcrumbNameMap = {}
+        let pathname = {}
+        let menuData = [ 
+            {   
+                icon: "dashboard",
+                locale: "menu.dashboard",
+                name: "Dashboard",
+                path: "/dashboard",
+                children: [
+                    {   
+                        icon: "dashboard",
+                        locale: "menu.foo",
+                        name: "Main",
+                        path: "/",
+                    },
+                    {   
+                        icon: "dashboard",
+                        locale: "menu.foo",
+                        name: "Foo",
+                        path: "/foo",
+                    },
+                    {   
+                        icon: "dashboard",
+                        locale: "menu.bar",
+                        name: "Bar",
+                        path: "/bar",
+                    }
+                ]
+            },
+            {   
+                icon: "dashboard",
+                locale: "menu.foo",
+                name: "Foo",
+                path: "/foo",
+            },
+            {   
+                icon: "dashboard",
+                locale: "menu.bar",
+                name: "Bar",
+                path: "/bar",
+            }
+        ]
+
+        const isTop = PropsLayout === 'topmenu';
+        const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
+        const layout = (
+          <Layout>
+            {isTop && !isMobile ? null : (
+              <SiderMenu
+                logo={logo}
+                theme={navTheme}
+                onCollapse={this.handleMenuCollapse}
+                menuData={menuData}
+                isMobile={isMobile}
+                {...this.props}
+
+                // Majid :)
+                breadcrumbNameMap={breadcrumbNameMap}
+                location={{pathname: '/foo'}}
+              />
             )}
-          </ContainerQuery>
-        </DocumentTitle>
-        <Suspense fallback={null}>{this.renderSettingDrawer()}</Suspense>
-      </React.Fragment>
-    );
-  }
+            <Layout
+              style={{
+                ...this.getLayoutStyle(),
+                minHeight: '100vh',
+              }}
+            >
+              <Header
+                menuData={menuData}
+                handleMenuCollapse={this.handleMenuCollapse}
+                logo={logo}
+                isMobile={isMobile}
+                {...this.props}
+              />
+              <Content className={styles.content} style={contentStyle}>
+                {children}
+              </Content>
+              <Footer />
+            </Layout>
+          </Layout>
+        );
+        
+        return (
+          <React.Fragment>
+            <DocumentTitle title={getPageTitle(pathname, breadcrumbNameMap)}>
+              <ContainerQuery query={query}>
+                {params => (
+                  <Context.Provider value={this.getContext()}>
+                    <div className={classNames(params)}>{layout}</div>
+                  </Context.Provider>
+                )}
+              </ContainerQuery>
+            </DocumentTitle>
+            <Suspense fallback={null}>{this.renderSettingDrawer()}</Suspense>
+          </React.Fragment>
+        );
+    }
 }
 
 // export default connect(({ global, setting, menu: menuModel }) => ({

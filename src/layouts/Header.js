@@ -33,8 +33,7 @@ export default class HeaderView extends Component {
   }
 
   getHeadWidth = () => {
-    const { isMobile, collapsed, setting } = this.props;
-    const { fixedHeader, layout } = setting;
+    const { isMobile, collapsed, layout, fixedHeader } = this.props;
     if (isMobile || !fixedHeader || layout === 'topmenu') {
       return '100%';
     }
@@ -114,8 +113,7 @@ export default class HeaderView extends Component {
   };
 
   render() {
-    const { isMobile, handleMenuCollapse, setting } = this.props;
-    const { navTheme, layout, fixedHeader } = setting;
+    const { isMobile, handleMenuCollapse, navTheme, layout, fixedHeader } = this.props;
     const { visible } = this.state;
     const isTop = layout === 'topmenu';
     const width = this.getHeadWidth();
