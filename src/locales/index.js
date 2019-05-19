@@ -1,10 +1,21 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-
 import en from './en-US/en_us'
 import fa from './fa-IR/fa_ir'
 
 const resources = { en, fa }
+export const languages = [
+    {
+        key: 'en',
+        label: 'English',
+        icon: '🇬🇧',
+    },
+    {
+        key: 'fa',
+        label: 'فارسی',
+        icon: '🇮🇷',
+    }
+]
 
 i18n
     .use(initReactI18next)
