@@ -7,7 +7,10 @@ import './App.less';
 
 const App = () => (
 	<Router>
-		<BasicLayout {...defaultSettings}>
+		<BasicLayout 
+			menuData={routes}
+			{...defaultSettings}
+		>
 			{routes.map((r, i) => <Route exact path={r.path} component={r.component} /> )}
 		</BasicLayout>
 	</Router>

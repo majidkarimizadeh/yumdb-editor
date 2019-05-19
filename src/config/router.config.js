@@ -5,14 +5,32 @@ import Bar from '../pages/Bar/Bar'
 const routes = [
 	{
 		path: '/',
-		component: Dashboard
+		icon: 'dashboard',
+		name: 'Dashboard',
+        locale: 'menu.dashboard',
+		component: Dashboard,
+		children: [
+			{
+				path: '/',
+				icon: 'dashboard',
+				name: 'Main',
+		        locale: 'menu.dashboard',
+				component: Dashboard,
+			},
+		]
 	},
 	{
-		path: '/foo',
+		icon: 'dashboard',
+        locale: 'menu.foo',
+        name: 'Foo',
+        path: '/foo',
 		component: Foo
 	},
 	{
-		path: '/bar',
+		icon: 'dashboard',
+        locale: 'menu.bar',
+        name: 'Bar',
+        path: '/bar',
 		component: Bar
 	}
 ]

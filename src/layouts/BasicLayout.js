@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { ContainerQuery } from 'react-container-query';
@@ -45,7 +46,7 @@ const query = {
     },
 };
 
-export default class BasicLayout extends React.Component {
+class BasicLayout extends React.Component {
 
     componentDidMount() {
 
@@ -114,55 +115,15 @@ export default class BasicLayout extends React.Component {
             isMobile,
             fixedHeader,
             navTheme,
+            menuData,
+            location: { pathname },
+
             // Majid :)
-            // location: { pathname },
-            // menuData,
             // breadcrumbNameMap,
         } = this.props;
 
         // Majid :)
         let breadcrumbNameMap = {}
-        let pathname = {}
-        let menuData = [ 
-            {   
-                icon: "dashboard",
-                locale: "menu.dashboard",
-                name: "Dashboard",
-                path: "/dashboard",
-                children: [
-                    {   
-                        icon: "dashboard",
-                        locale: "menu.foo",
-                        name: "Main",
-                        path: "/",
-                    },
-                    {   
-                        icon: "dashboard",
-                        locale: "menu.foo",
-                        name: "Foo",
-                        path: "/foo",
-                    },
-                    {   
-                        icon: "dashboard",
-                        locale: "menu.bar",
-                        name: "Bar",
-                        path: "/bar",
-                    }
-                ]
-            },
-            {   
-                icon: "dashboard",
-                locale: "menu.foo",
-                name: "Foo",
-                path: "/foo",
-            },
-            {   
-                icon: "dashboard",
-                locale: "menu.bar",
-                name: "Bar",
-                path: "/bar",
-            }
-        ]
 
         const isTop = PropsLayout === 'topmenu';
         const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
@@ -176,10 +137,6 @@ export default class BasicLayout extends React.Component {
                 menuData={menuData}
                 isMobile={isMobile}
                 {...this.props}
-
-                // Majid :)
-                breadcrumbNameMap={breadcrumbNameMap}
-                location={{pathname: '/foo'}}
               />
             )}
             <Layout
@@ -202,7 +159,7 @@ export default class BasicLayout extends React.Component {
             </Layout>
           </Layout>
         );
-        
+
         return (
           <React.Fragment>
             <DocumentTitle title={getPageTitle(pathname, breadcrumbNameMap)}>
@@ -219,6 +176,8 @@ export default class BasicLayout extends React.Component {
         );
     }
 }
+
+export default withRouter(BasicLayout)
 
 // export default connect(({ global, setting, menu: menuModel }) => ({
 //   collapsed: global.collapsed,
