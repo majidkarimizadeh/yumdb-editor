@@ -4,6 +4,10 @@ const tr = {
 	'menu.account.settings': 'Setting',
 	'menu.account.trigger': 'Trigger',
 	'menu.account.logout': 'Logout',
+
+	'menu.dashboard': 'Dashboard',
+	'menu.foo': 'Fooo',
+	'menu.bar': 'Barr',
 }
 
 export default { translation: tr };

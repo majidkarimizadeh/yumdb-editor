@@ -6,32 +6,32 @@ const routes = [
 	{
 		path: '/',
 		icon: 'dashboard',
-		name: 'Dashboard',
-        locale: 'menu.dashboard',
+        name: 'menu.dashboard',
 		component: Dashboard,
+		hideInMenu: false,
 		children: [
 			{
 				path: '/',
 				icon: 'dashboard',
-				name: 'Main',
-		        locale: 'menu.dashboard',
+		        name: 'menu.dashboard',
 				component: Dashboard,
+				hideInMenu: false,
 			},
 		]
 	},
 	{
 		icon: 'dashboard',
-        locale: 'menu.foo',
-        name: 'Foo',
+        name: 'menu.foo',
         path: '/foo',
-		component: Foo
+		component: Foo,
+		hideInMenu: false,
 	},
 	{
 		icon: 'dashboard',
-        locale: 'menu.bar',
-        name: 'Bar',
+        name: 'menu.bar',
         path: '/bar',
-		component: Bar
+		component: Bar,
+		hideInMenu: false,
 	}
 ]
 

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next';
 import { Menu, Icon } from 'antd';
 //import Link from 'umi/link';
 import { urlToList } from '../_utils/pathTools';
@@ -57,13 +58,14 @@ class BaseMenu extends PureComponent {
     // doc: add hideChildrenInMenu
     if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
       const { name } = item;
+      const { t } = this.props
       return (
         <SubMenu
           title={
             item.icon ? (
               <span>
                 {getIcon(item.icon)}
-                <span>{name}</span>
+                <span>{t(name)}</span>
               </span>
             ) : (
               name
@@ -88,12 +90,13 @@ class BaseMenu extends PureComponent {
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
     const { target } = item;
+    const { t } = this.props;
     // Is it a http link
     if (/^https?:\/\//.test(itemPath)) {
       return (
         <a href={itemPath} target={target}>
           {icon}
-          <span>{name}</span>
+          <span>{t(name)}</span>
         </a>
       );
     }
@@ -112,7 +115,7 @@ class BaseMenu extends PureComponent {
         }
       >
         {icon}
-        <span>{name}</span>
+        <span>{t(item.name)}</span>
       </a>
     );
   };
@@ -184,4 +187,4 @@ class BaseMenu extends PureComponent {
 }
 
 
-export default withRouter(BaseMenu)
+export default withTranslation()(withRouter(BaseMenu))
