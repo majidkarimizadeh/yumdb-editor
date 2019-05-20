@@ -255,6 +255,21 @@ class Table extends Component {
 								     	Overview
 								    </TabPane>
 								    <TabPane tab="Items" key="items">
+								    	<Row>
+								    		<Col span={12} style={{marginBottom:'10px'}}> 
+							    				<Button 
+									        		onClick={() => this.setState({
+									        			value: `INSERT INTO ${selectedTable} () VALUES ()`
+									        		})} 
+									        		type="primary"
+									        	> 
+									        		Create Item
+									        	</Button>
+							    			</Col>
+							    			<Col span={12} style={{textAlign:'right', marginBottom:'10px'}}> 
+							    				<Button onClick={() => this.executeQuery(`SELECT * FROM ${selectedTable}`)} loading={isDataLoading} icon="sync" />
+							    			</Col>
+		        						</Row>
 								    	<Collapse 
 								    		onChange={(activeIndex) => this.setState({
 								    			scrollY: (activeIndex ? 200 : 320)
