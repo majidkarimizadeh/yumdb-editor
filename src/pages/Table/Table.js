@@ -121,18 +121,21 @@ class Table extends Component {
 			    dataIndex: 'name',
 			    key: 'name',
 			    width: 200,
+			    sorter: (a, b) => a.name.length - b.name.length,
 			},
 			{
 			    title: 'Number',
 			    dataIndex: 'number',
 			    key: 'number',
 			    width: 200,
+			    sorter: (a, b) => a.number - b.number,
 			},
 			{
 			    title: 'Birthday',
 			    dataIndex: 'birth',
 			    key: 'birth',
 			    width: 200,
+			    sorter: (a, b) => a.birth.length - b.birth.length,
 			},
 
 			{
@@ -140,18 +143,21 @@ class Table extends Component {
 			    dataIndex: 'name1',
 			    key: 'name1',
 			    width: 200,
+			    sorter: (a, b) => a.name1.length - b.name1.length,
 			},
 			{
 			    title: 'Number 1',
 			    dataIndex: 'number1',
 			    key: 'number1',
 			    width: 200,
+			    sorter: (a, b) => a.number1 - b.number1,
 			},
 			{
 			    title: 'Birthday 1',
 			    dataIndex: 'birth1',
 			    key: 'birth1',
 			    width: 200,
+			    sorter: (a, b) => a.birth1.length - b.birth1.length,
 			},
 
 			{
@@ -159,18 +165,21 @@ class Table extends Component {
 			    dataIndex: 'name2',
 			    key: 'name2',
 			    width: 200,
+			    sorter: (a, b) => a.name2.length - b.name2.length,
 			},
 			{
 			    title: 'Number 2',
 			    dataIndex: 'number2',
 			    key: 'number2',
 			    width: 200,
+			    sorter: (a, b) => a.number2 - b.number2,
 			},
 			{
 			    title: 'Birthday 2',
 			    dataIndex: 'birth2',
 			    key: 'birth2',
 			    width: 200,
+			    sorter: (a, b) => a.birth2.length - b.birth2.length,
 			},
 		]
 
