@@ -23,8 +23,8 @@ export function request(
   url,
   body,
   abortable = false,
-  withCredentials = true,
-  useRequestedWith = true
+  withCredentials = false,
+  useRequestedWith = false
 ) {
   if (
     !url.startsWith('http://') &&

@@ -5,7 +5,7 @@ import { PageHeader, Tabs, Typography } from 'antd';
 import { connect } from 'dva';
 import classNames from 'classnames';
 import GridContent from './GridContent';
-import styles from './index.less';
+import styles from './index.module.less';
 import MenuContext from '@/layouts/MenuContext';
 import { conversionBreadcrumbList } from './breadcrumb';
 

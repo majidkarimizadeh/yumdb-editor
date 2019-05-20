@@ -6,8 +6,11 @@ const tr = {
 	'menu.account.logout': 'Logout',
 
 	'menu.dashboard': 'Dashboard',
-	'menu.foo': 'Fooo',
-	'menu.bar': 'Barr',
+	'menu.tables': 'Tables',
+	'menu.editor': 'Editor',
+	'menu.backups': 'Backups',
+	'menu.reserved.capacity': 'Reserved Capacity',
+	'menu.preferences': 'Preferences',
 }
 
 export default { translation: tr };
