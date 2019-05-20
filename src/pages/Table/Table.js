@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import i18n from '../../locales';
-import { Table as AntdTable, Divider, Tag, Card, Button, Row, Col, Tabs, Icon } from 'antd';
+import { Table as AntdTable, Divider, Tag, Card, Button, Row, Col, Tabs, Icon, Collapse } from 'antd';
 import { request } from '../../lib/ajax';
 import { withTranslation } from 'react-i18next';
 
@@ -15,6 +15,7 @@ import 'brace/theme/monokai';
 
 const TabPane = Tabs.TabPane;
 const ButtonGroup = Button.Group;
+const Panel = Collapse.Panel;
 
 class Table extends Component {
 
@@ -229,42 +230,52 @@ class Table extends Component {
 								     	Overview
 								    </TabPane>
 								    <TabPane tab="Items" key="items">
-								    	
-								    	<AceEditor
-										  	placeholder=""
-										  	mode="mysql"
-										  	theme="monokai"
-										  	name="ace-editor"
-										  	onChange={this.onChange}
-										  	fontSize={16}
-										  	showPrintMargin={true}
-										  	showGutter={true}
-										  	highlightActiveLine={true}
-										  	value={value}
-										  	setOptions={{
-										  		enableBasicAutocompletion: true,
-										  		enableLiveAutocompletion: true,
-										  		enableSnippets: true,
-										  		showLineNumbers: true,
-										  		tabSize: 2,
-										  	}}
-										  	style={{width: '100%', height:'85px', margin: '10px 0px'}}
+								    	<Collapse bordered={false} defaultActiveKey={['1']}>
+										    <Panel 
+										    	header={`Scan Table " ${selectedTable} "`}
+										    	key="1"
+										    	style={{
+												  	background: '#cfd8dc',
+												  	borderRadius: 4,
+												  	marginBottom: 24,
+												  	border: 0,
+												  	overflow: 'hidden',
+												}}
+										    >
+										    	<AceEditor
+												  	placeholder=""
+												  	mode="mysql"
+												  	theme="monokai"
+												  	name="ace-editor"
+												  	onChange={this.onChange}
+												  	fontSize={16}
+												  	showPrintMargin={true}
+												  	showGutter={true}
+												  	highlightActiveLine={true}
+												  	value={value}
+												  	setOptions={{
+												  		enableBasicAutocompletion: true,
+												  		enableLiveAutocompletion: true,
+												  		enableSnippets: true,
+												  		showLineNumbers: true,
+												  		tabSize: 2,
+												  	}}
+												  	style={{width: '100%', height:'85px', margin: '10px 0px'}}
+												/>
+												<Button 
+									        		onClick={() => this.onExecute()} 
+									        		type="primary"
+									        	> 
+									        		Execute
+									        	</Button>
+										    </Panel>
+									  	</Collapse>
+										<AntdTable 
+											scroll={{ y: 240, x: 1800 }}
+							        		pagination={false}
+											dataSource={dataSource} 
+											columns={dataColumns}
 										/>
-										<Button 
-							        		onClick={() => this.onExecute()} 
-							        		type="primary"
-							        	> 
-							        		Execute
-							        	</Button>
-										<Divider />
-										<div>
-											<AntdTable 
-												scroll={{ y: 240, x: 1800 }}
-								        		pagination={false}
-												dataSource={dataSource} 
-												columns={dataColumns}
-											/>
-										</div>
 								    </TabPane>
 								    <TabPane tab="Metrics" key="3">
 								    	Metrics
