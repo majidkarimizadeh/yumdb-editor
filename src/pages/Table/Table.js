@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import i18n from '../../locales';
-import { Table as AntdTable, Divider, Tag, Card, Button, Row, Col, Tabs } from 'antd';
+import { Table as AntdTable, Divider, Tag, Card, Button, Row, Col, Tabs, Icon } from 'antd';
 import { request } from '../../lib/ajax';
 import { withTranslation } from 'react-i18next';
 
@@ -14,6 +14,7 @@ import 'brace/mode/mysql';
 import 'brace/theme/monokai';
 
 const TabPane = Tabs.TabPane;
+const ButtonGroup = Button.Group;
 
 class Table extends Component {
 
@@ -24,7 +25,8 @@ class Table extends Component {
 			tableSource: [],
 			showSplit: false,
 			selectedTable: '',
-			value: ''
+			value: '',
+			verticalSplit: false,
 		}
 		this.onChange = this.onChange.bind(this)
 		this.onExecute = this.onExecute.bind(this)
@@ -96,7 +98,7 @@ class Table extends Component {
 	render() 
 	{
 		const { t } = this.props
-		const { tableSource, dataSource,  showSplit, selectedTable, value } = this.state
+		const { tableSource, dataSource,  showSplit, selectedTable, value, verticalSplit } = this.state
 
 		const tableColumns = [
 		  	{
@@ -186,7 +188,7 @@ class Table extends Component {
 	    return (
 			<Row>
 				<Col span={24} style={{height:'100vh'}}>
-		    		<SplitterLayout percentage secondaryInitialSize={80}>
+		    		<SplitterLayout vertical={verticalSplit} percentage secondaryInitialSize={80}>
 	    				<Card style={{height:'100vh'}}>
 				        	<AntdTable 
 				        		pagination={false}
@@ -196,15 +198,31 @@ class Table extends Component {
 						</Card>
 		    			{showSplit &&
 					        <Card style={{height:'100vh'}}>
-					        	<h1>
-					        		{selectedTable}
-					        		<Button 
-						        		onClick={() => this.setState({ showSplit: false})} 
-						        		type="link"
-						        	> 
-						        		Close 
-						        	</Button>
-					        	</h1>
+					        	<Row>
+					        		<Col span={12}>
+					        			<h1>
+							        		{selectedTable}
+							        		<Button 
+								        		onClick={() => this.setState({ showSplit: false})} 
+								        		type="link"
+								        	> 
+								        		Close 
+								        	</Button>
+							        	</h1>
+					        		</Col>
+					        		<Col span={12} style={{textAlign:'right'}}>
+					        			<div>
+					        				<ButtonGroup>
+										      	<Button type={verticalSplit ? 'primary' : 'default'} onClick={() => this.setState({ verticalSplit:true })}>
+										      		Vertical
+										      	</Button>
+										      	<Button type={!verticalSplit ? 'primary' : 'default'} onClick={() => this.setState({ verticalSplit:false })}>
+										      		Horizontal
+										      	</Button>
+										    </ButtonGroup>
+					        			</div>
+					        		</Col>
+					        	</Row>
 
 					        	<Tabs onChange={this.onTabChange} type="card">
 								    <TabPane tab="Overview" key="1">
