@@ -28,7 +28,7 @@ class Table extends Component {
 			selectedTable: '',
 			value: '',
 			verticalSplit: false,
-			scrollY: 200,
+			scrollY: 160,
 			isDataLoading: false
 		}
 		this.onChange = this.onChange.bind(this)
@@ -291,7 +291,7 @@ class Table extends Component {
 		        						</Row>
 								    	<Collapse 
 								    		onChange={(activeIndex) => this.setState({
-								    			scrollY: (activeIndex ? 200 : 320)
+								    			scrollY: (activeIndex ? 160 : 320)
 								    		}) }
 								    		bordered={false}
 								    		accordion={true}
