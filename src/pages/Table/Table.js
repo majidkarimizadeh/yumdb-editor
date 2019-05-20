@@ -28,12 +28,14 @@ class Table extends Component {
 			selectedTable: '',
 			value: '',
 			verticalSplit: false,
-			scrollY: 200
+			scrollY: 200,
+			isDataLoading: false
 		}
 		this.onChange = this.onChange.bind(this)
 		this.onExecute = this.onExecute.bind(this)
 		this.onTabChange = this.onTabChange.bind(this)
 		this.executeQuery = this.executeQuery.bind(this)
+		this.onTableSelect = this.onTableSelect.bind(this)
 	}
 
 	onTabChange(index) {
@@ -48,6 +50,16 @@ class Table extends Component {
 		}
 	}
 
+	onTableSelect(text) {
+		let query = `SELECT * FROM ${text}` 
+		this.setState({ 
+			showSplit: true, 
+			selectedTable: text,
+			value: query
+		})
+		this.executeQuery(query)
+	}
+
 	onChange(value) {
 		this.setState({ value })
 	}
@@ -59,6 +71,7 @@ class Table extends Component {
 
 	executeQuery(q) {
 
+		this.setState({ isDataLoading: true })
 		request('Post', 'http://192.168.2.134:6095/exec', { q })
 			.then( res => {
 				let results = JSON.parse(res.results)
@@ -80,7 +93,9 @@ class Table extends Component {
 					    birth2: item.birthday,
 					}
 				})
-				this.setState({ dataSource })
+				setTimeout( () => {
+					this.setState({ dataSource, isDataLoading: false })
+				}, 1000) 
 			})
 	}
 
@@ -100,14 +115,23 @@ class Table extends Component {
 	render() 
 	{
 		const { t } = this.props
-		const { tableSource, dataSource,  showSplit, selectedTable, value, verticalSplit, scrollY } = this.state
+		const { 
+			tableSource, 
+			dataSource, 
+			showSplit,
+			selectedTable,
+			value,
+			verticalSplit,
+			scrollY,
+			isDataLoading
+		} = this.state
 
 		const tableColumns = [
 		  	{
 			    title: 'Name',
 			    dataIndex: 'name',
 			    key: 'name',
-			    render: text => <a onClick={() => this.setState({ showSplit: true, selectedTable: text})}>{text}</a>,
+			    render: text => <a onClick={() => this.onTableSelect(text)}>{text}</a>,
 			    filters: tableSource.map( ds => { 
 			    	return { 
 				    	text: ds.name,
@@ -279,15 +303,19 @@ class Table extends Component {
 												  	}}
 												  	style={{width: '100%', height:'85px', margin: '10px 0px'}}
 												/>
-												<Button 
-									        		onClick={() => this.onExecute()} 
-									        		type="primary"
-									        	> 
-									        		Execute
-									        	</Button>
+												<div style={{textAlign:'right'}}>
+													<Button 
+														loading={isDataLoading}
+										        		onClick={() => this.onExecute()} 
+										        		type="primary"
+										        	> 
+										        		Execute
+										        	</Button>
+									        	</div>
 										    </Panel>
 									  	</Collapse>
 										<AntdTable 
+											loading={isDataLoading}
 											scroll={{ y: scrollY, x: 1800 }}
 							        		pagination={false}
 											dataSource={dataSource} 
