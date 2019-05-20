@@ -45,7 +45,6 @@ class Table extends Component {
 			case 'items' : 
 			{
 				this.executeQuery(`SELECT * FROM ${selectedTable}`)
-				this.setState({value: `SELECT * FROM ${selectedTable}` })
 			}
 		}
 	}
@@ -94,7 +93,7 @@ class Table extends Component {
 					}
 				})
 				setTimeout( () => {
-					this.setState({ dataSource, isDataLoading: false })
+					this.setState({ dataSource, isDataLoading: false, value:q })
 				}, 1000) 
 			})
 	}
