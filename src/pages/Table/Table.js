@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import i18n from '../../locales';
-import { Table as AntdTable, Divider, Tag, Card, Button, Row, Col, Tabs, Icon, Collapse } from 'antd';
+import { Table as AntdTable, Divider, Tag, Card, Button, Row, Col, Tabs, Icon, Collapse, Menu, Dropdown } from 'antd';
 import { request } from '../../lib/ajax';
 import { withTranslation } from 'react-i18next';
 
@@ -246,6 +246,7 @@ class Table extends Component {
 										      		Horizontal
 										      	</Button>
 										    </ButtonGroup>
+										    <Button style={{marginLeft: '10px'}} icon="question-circle" />
 					        			</div>
 					        		</Col>
 					        	</Row>
@@ -258,6 +259,7 @@ class Table extends Component {
 								    	<Row>
 								    		<Col span={12} style={{marginBottom:'10px'}}> 
 							    				<Button 
+							    					style={{marginRight: '10px'}}
 									        		onClick={() => this.setState({
 									        			value: `INSERT INTO ${selectedTable} () VALUES ()`
 									        		})} 
@@ -265,6 +267,24 @@ class Table extends Component {
 									        	> 
 									        		Create Item
 									        	</Button>
+
+									        	<Dropdown overlay={
+									        		<Menu onClick={(menu) => alert(menu.key)}>
+													    <Menu.Item key="1">
+													      	<Icon type="export" />
+													      	Export
+													    </Menu.Item>
+													    <Menu.Item key="2">
+													      	<Icon type="delete" />
+													      	Delete
+													    </Menu.Item>
+													</Menu>
+									        	}>
+											      	<Button>
+											        	Action <Icon type="down" />
+											      	</Button>
+											    </Dropdown>
+
 							    			</Col>
 							    			<Col span={12} style={{textAlign:'right', marginBottom:'10px'}}> 
 							    				<Button onClick={() => this.executeQuery(`SELECT * FROM ${selectedTable}`)} loading={isDataLoading} icon="sync" />
