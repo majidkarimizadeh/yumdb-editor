@@ -28,6 +28,7 @@ class Table extends Component {
 			selectedTable: '',
 			value: '',
 			verticalSplit: false,
+			scrollY: 200
 		}
 		this.onChange = this.onChange.bind(this)
 		this.onExecute = this.onExecute.bind(this)
@@ -99,7 +100,7 @@ class Table extends Component {
 	render() 
 	{
 		const { t } = this.props
-		const { tableSource, dataSource,  showSplit, selectedTable, value, verticalSplit } = this.state
+		const { tableSource, dataSource,  showSplit, selectedTable, value, verticalSplit, scrollY } = this.state
 
 		const tableColumns = [
 		  	{
@@ -230,9 +231,25 @@ class Table extends Component {
 								     	Overview
 								    </TabPane>
 								    <TabPane tab="Items" key="items">
-								    	<Collapse bordered={false} defaultActiveKey={['1']}>
+								    	<Collapse 
+								    		onChange={(activeIndex) => this.setState({
+								    			scrollY: (activeIndex ? 200 : 320)
+								    		}) }
+								    		bordered={false}
+								    		accordion={true}
+								    		defaultActiveKey={['1']}
+								    	>
 										    <Panel 
-										    	header={`Scan Table " ${selectedTable} "`}
+										    	header={
+										    		<Row>
+										    			<Col span={12}> 
+										    				Scan Table " {selectedTable} " 
+										    			</Col>
+										    			<Col span={12} style={{textAlign:'right'}}> 
+										    				{dataSource.length} Items found
+										    			</Col>
+					        						</Row>
+										    	}
 										    	key="1"
 										    	style={{
 												  	background: '#cfd8dc',
@@ -271,7 +288,7 @@ class Table extends Component {
 										    </Panel>
 									  	</Collapse>
 										<AntdTable 
-											scroll={{ y: 240, x: 1800 }}
+											scroll={{ y: scrollY, x: 1800 }}
 							        		pagination={false}
 											dataSource={dataSource} 
 											columns={dataColumns}
